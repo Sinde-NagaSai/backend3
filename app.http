@@ -1,1 +1,12 @@
-http://localhost:3000/todos
+GET http://localhost:3000/todos
+
+###
+DELETE http://localhost:3000/todos/2
+
+###
+POST http://localhost:3000/todos/
+Content-Type: application/json
+
+{
+    "title": "Learn Foundations"
+}

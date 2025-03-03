@@ -30,8 +30,27 @@ const initializeDBAndServer = async () => {
 
 initializeDBAndServer();
 
+
+//get todos
 app.get('/todos', async(request, response)=>{
   const getTodos='SELECT * FROM todos'
   const todos=await db.all(getTodos)
   response.send(todos)
+})
+
+//delete todos
+app.delete('/todos/:id', async (request, response)=>{
+  const {id}=request.params;
+  const deleteTodos=`DELETE FROM todos WHERE id = ${id};`
+  await db.run(deleteTodos)
+  response.send("Todo Deleted")
+})
+
+//add todos
+app.post('/todos', async (request, response)=>{
+  const {title}=request.body;
+  const addTodo=`INSERT INTO todos (title) VALUES ('${title}');`
+  await db.run(addTodo)
+  response.send("Todo Added")
+
 })
